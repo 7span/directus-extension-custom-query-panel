@@ -1,0 +1,46 @@
+{
+  "name": "@7span/directus-extension-custom-query-panel",
+  "version": "1.0.1",
+  "scripts": {
+    "build": "directus-extension build",
+    "dev": "directus-extension build -w --no-minify",
+    "link": "directus-extension link",
+    "add": "directus-extension add"
+  },
+  "directus:extension": {
+    "host": "^9.22.4",
+    "type": "bundle",
+    "path": {
+      "app": "dist/app.js",
+      "api": "dist/api.js"
+    },
+    "entries": [
+      {
+        "type": "panel",
+        "name": "custom-query-panel",
+        "source": "src/custom-query-panel/index.js"
+      },
+      {
+        "type": "endpoint",
+        "name": "custom-query",
+        "source": "src/custom-query/index.js"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@directus/extensions-sdk": "9.22.4",
+    "vue": "^3.2.47"
+  },
+  "author": {
+    "name": "7span",
+    "email": "yo@7span.com"
+  },
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/7span/directus-extension-custom-query-panel.git"
+  },
+  "homepage": "https://github.com/7span/directus-extension-custom-query-panel#Readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
+}
