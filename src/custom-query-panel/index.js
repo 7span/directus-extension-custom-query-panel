@@ -8,10 +8,11 @@ export default {
     component: PanelComponent,
     options: [
         {
-            field: "collection",
-            name: "Collection",
+            field: "query_id",
+            name: "Query ID",
             type: "string",
             meta: {
+                note: "Enter your Query ID here to retrieve data",
                 interface: "input",
                 width: "full",
             },
@@ -21,7 +22,11 @@ export default {
             name: "Fields",
             type: "string",
             meta: {
+                note: "Enter comma separated values here",
                 interface: "input",
+                options: {
+                    placeholder: "name,label,etc...",
+                },
                 width: "full",
             },
         },

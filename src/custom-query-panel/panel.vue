@@ -1,19 +1,6 @@
 <template>
     <div>
-        <div style="padding: 20px">
-            <component
-                :enableCreate="false"
-                :is="SelectDropdownM2o"
-                template="{{label}}"
-                :collection="collection"
-                field="query"
-                :value="selected"
-                @input="getData"
-            />
-        </div>
-
         <v-table
-            v-if="selected"
             class="text"
             :class="{ 'has-header': showHeader }"
             :items="items"
@@ -21,7 +8,6 @@
             v-model:headers="tableHeaders"
         >
         </v-table>
-        <div v-else>Please select Query to load data</div>
     </div>
 </template>
 
@@ -30,16 +16,6 @@ import { useExtensions } from "@directus/extensions-sdk";
 
 export default {
     setup() {
-        const { interfaces } = useExtensions();
-        console.log(
-            "🚀 ~ file: panel.vue:14 ~ setup ~ interfaces:",
-            interfaces
-        );
-
-        const { component: SelectDropdownM2o } = interfaces.value.find(
-            (i) => i.id === "select-dropdown-m2o"
-        );
-
         return {
             SelectDropdownM2o,
         };
@@ -50,15 +26,11 @@ export default {
             type: Boolean,
             default: false,
         },
-        query: {
+        query_id: {
             type: String,
             required: true,
         },
         fields: {
-            type: String,
-            required: true,
-        },
-        collection: {
             type: String,
             required: true,
         },
@@ -67,7 +39,6 @@ export default {
         return {
             items: [],
             loading: false,
-            selected: null,
         };
     },
     computed: {
@@ -88,21 +59,15 @@ export default {
     mounted() {
         this.getData();
     },
-    watch: {
-        selected(newValue) {
-            this.getData(newValue);
-        },
-    },
     methods: {
         getData(id) {
-            console.log("inside get data call", id);
             if (!id) {
                 return;
             }
             this.loading = true;
             this.selected = id;
             this.api
-                .get(`custom-query?id=${id}`)
+                .get(`custom-query?id=${query_id}`)
                 .then((res) => {
                     if (res.data && res.data.length) {
                         this.items = res.data[0];
