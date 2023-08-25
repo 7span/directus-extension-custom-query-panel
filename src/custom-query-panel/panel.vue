@@ -12,13 +12,9 @@
 </template>
 
 <script>
-import { useExtensions } from "@directus/extensions-sdk";
-
 export default {
     setup() {
-        return {
-            SelectDropdownM2o,
-        };
+        return {};
     },
     inject: ["api"],
     props: {
@@ -60,12 +56,12 @@ export default {
         this.getData();
     },
     methods: {
-        getData(id) {
-            if (!id) {
+        getData() {
+            if (!this.query_id) {
+                alert("Please provide Query ID from panel configuration");
                 return;
             }
             this.loading = true;
-            this.selected = id;
             this.api
                 .get(`custom-query?id=${query_id}`)
                 .then((res) => {
