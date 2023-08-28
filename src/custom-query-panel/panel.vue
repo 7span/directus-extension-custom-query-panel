@@ -63,10 +63,11 @@ export default {
             }
             this.loading = true;
             this.api
-                .get(`custom-query?id=${query_id}`)
+                .get(`query/execute?query_id=${this.query_id}`)
                 .then((res) => {
-                    if (res.data && res.data.length) {
-                        this.items = res.data[0];
+                    if (res.data && res.data.data.length) {
+                    
+                        this.items = res.data.data;
                     }
                 })
                 .catch((error) => {

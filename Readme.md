@@ -1,9 +1,15 @@
-## Initial Commit
+## Directus Extension Custom Query Panel 
 
-## Checking push access
+# How To use This Extension
+- Once you install the extension into your directus project by `npm install`
+- Hit the below curl request to create a default table to store the queries.
 
--   Need to setup table with relational field for queries
--   `collection` field contains table name to select relational field data
--   `fields` will contain table columns to display data
--   `custom-query` endpoint will be given id of selected record.
--   `Relational field name` should contain name `query` in table. ( it is currently static )
+NOTE: Replace `localhost:8055` with your domain
+
+```bash
+curl --location --request POST 'localhost:8055/query/create-table'
+```
+
+- Table named `cqp_queries` will be available in your project.
+- Create the queries in the table.
+- Provide the query id where the vue component is available.
