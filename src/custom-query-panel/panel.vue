@@ -27,8 +27,17 @@ export default {
             required: true,
         },
         fields: {
-            type: String,
-            required: true,
+            type: Array,
+            required: () => [],
+        },
+        variables: {
+            type: Array,
+            required: () => [],
+        },
+    },
+    watch: {
+        variables() {
+            this.getData();
         },
     },
     data() {
@@ -39,17 +48,15 @@ export default {
     },
     computed: {
         tableHeaders() {
-            return this.localFields?.map((field) => {
+            return this.fields?.map((field) => {
                 return {
-                    text: field.toUpperCase(),
-                    value: field,
+                    text: field.label.toUpperCase(),
+                    value: field.key,
                     align: "left",
                     sortable: false,
+                    width: field.width,
                 };
             });
-        },
-        localFields() {
-            return this.fields.split(",");
         },
     },
     mounted() {
@@ -62,11 +69,17 @@ export default {
                 return;
             }
             this.loading = true;
-            this.api
-                .get(`query/execute?query_id=${this.query_id}`)
+
+            this.api(`query/execute`, {
+                params: {
+                    query_id: this.query_id,
+                    variables: this.variables.length
+                        ? this.variables
+                        : undefined,
+                },
+            })
                 .then((res) => {
                     if (res.data && res.data.data.length) {
-                    
                         this.items = res.data.data;
                     }
                 })

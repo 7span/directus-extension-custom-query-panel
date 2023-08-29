@@ -20,14 +20,93 @@ export default {
         {
             field: "fields",
             name: "Fields",
-            type: "string",
+            type: "standard",
             meta: {
-                note: "Enter comma separated values here",
-                interface: "input",
-                options: {
-                    placeholder: "name,label,etc...",
-                },
+                interface: "list",
                 width: "full",
+                options: {
+                    fields: [
+                        {
+                            field: "key",
+                            name: "Key",
+                            type: "string",
+                            meta: {
+                                field: "key",
+                                width: "half",
+                                type: "string",
+                                interface: "input",
+                            },
+                        },
+
+                        {
+                            field: "label",
+                            name: "Label",
+                            type: "string",
+                            meta: {
+                                field: "label",
+                                width: "half",
+                                type: "string",
+                                interface: "input",
+                            },
+                        },
+                        {
+                            field: "width",
+                            name: "Width",
+                            type: "string",
+                            meta: {
+                                field: "width",
+                                width: "half",
+                                type: "string",
+                                interface: "input",
+                            },
+                        },
+                    ],
+                },
+            },
+        },
+
+        // Variables
+        {
+            field: "variables",
+            name: "Variables",
+            type: "standard",
+            meta: {
+                interface: "list",
+                width: "full",
+                options: {
+                    fields: [
+                        {
+                            field: "key",
+                            name: "Key",
+                            type: "string",
+                            meta: {
+                                field: "key",
+                                width: "half",
+                                options: {
+                                    placeholder:
+                                        "Enter Dynamic Variable key here",
+                                },
+                                type: "string",
+                                interface: "input",
+                            },
+                        },
+                        {
+                            field: "value",
+                            name: "Value",
+                            type: "string",
+                            meta: {
+                                note: "Enter {{ variable_name }} to work properly",
+                                field: "value",
+                                width: "half",
+                                options: {
+                                    placeholder: "{{department}}",
+                                },
+                                type: "string",
+                                interface: "input",
+                            },
+                        },
+                    ],
+                },
             },
         },
     ],
