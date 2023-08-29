@@ -1,14 +1,12 @@
 <template>
-    <div>
-        <v-table
-            class="text"
-            :class="{ 'has-header': showHeader }"
-            :items="items"
-            :loading="loading"
-            v-model:headers="tableHeaders"
-        >
-        </v-table>
-    </div>
+    <v-table
+        class="text"
+        :class="{ 'has-header': showHeader }"
+        :items="items"
+        :loading="loading"
+        v-model:headers="tableHeaders"
+    >
+    </v-table>
 </template>
 
 <script>
