@@ -97,6 +97,11 @@ export default {
     padding: 12px;
 }
 
+.panel-container {
+    /* Fix for providing Scroll in table  */
+    overflow-y: scroll;
+}
+
 .text.has-header {
     padding: 0 12px;
 }
