@@ -92,17 +92,17 @@ export default {
 };
 </script>
 
-<style scoped>
-.text {
+<style>
+.workspace .text {
     padding: 12px;
 }
 
-.panel-container {
+.workspace .panel-container {
     /* Fix for providing Scroll in table  */
     overflow-y: scroll;
 }
 
-.text.has-header {
+.workspace .text.has-header {
     padding: 0 12px;
 }
 </style>
