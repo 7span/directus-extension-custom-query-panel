@@ -36,11 +36,14 @@
     "email": "yo@7span.com"
   },
   "repository": {
-      "type": "git",
-      "url": "https://github.com/7span/directus-extension-custom-query-panel.git"
+    "type": "git",
+    "url": "https://github.com/7span/directus-extension-custom-query-panel.git"
   },
   "homepage": "https://github.com/7span/directus-extension-custom-query-panel#Readme",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
+  },
+  "dependencies": {
+    "paraphrase": "^3.1.1"
   }
 }
