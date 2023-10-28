@@ -1,11 +1,42 @@
-## Directus Extension Custom Query Panel
+# Custom Query Panel
 
-Please note
+An easy to use insight panel to see custom raw query data from database
+
+# Details
+
+## Problem
+
+-   Getting data from database query and show it in a insights panel was missing.
+
+## Extension Type
+
+-   📦 Bundle ( Panel + Custom Endpoint )
+
+## Set Up Instructions
+
+{ Include any instructions required to set up this submission - including any registrations for third-party services. }
+
+## Screenshots
+
+{ Include at least one screenshot or video. }
+
+## Collaborators
+
+-   [Harsh Kansagara](https://github.com/theharshin)
+-   [Jay Bharadia](https://github.com/jay-p-b-7span)
+-   [Bhagyesh Radiya](https://github.com/bhagyesh-7span)
+
+## Contact Details
+
+-   [Linkedin](https://www.linkedin.com/company/7span)
+-   [Gmail](mailto:yo@7span.com)
+
+## 🚧 Please note
 
 -   this extension uses raw query. Use with caution. It might do uninteded actions.
 -   Roles and permission check for query
 
-# How To use This Extension
+## How To use This Extension
 
 -   Once you install the extension into your directus project by `npm install`
 -   Hit the below curl request to create a default table to store the queries.
