@@ -22,6 +22,7 @@ export default {
             name: "Fields",
             type: "standard",
             meta: {
+                note: "Enter Table Column(s) for displaying data",
                 interface: "list",
                 width: "full",
                 options: {
@@ -35,6 +36,9 @@ export default {
                                 width: "half",
                                 type: "string",
                                 interface: "input",
+                                options: {
+                                    placeholder: "first_name",
+                                },
                             },
                         },
 
@@ -45,6 +49,9 @@ export default {
                             meta: {
                                 field: "label",
                                 width: "half",
+                                options: {
+                                    placeholder: "First Name",
+                                },
                                 type: "string",
                                 interface: "input",
                             },
@@ -53,6 +60,9 @@ export default {
                             field: "width",
                             name: "Width",
                             type: "string",
+                            schema: {
+                                default_value: "300",
+                            },
                             meta: {
                                 field: "width",
                                 width: "half",

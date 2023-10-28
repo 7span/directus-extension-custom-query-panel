@@ -1,5 +1,10 @@
 ## Directus Extension Custom Query Panel
 
+Please note
+
+-   this extension uses raw query. Use with caution. It might do uninteded actions.
+-   Roles and permission check for query
+
 # How To use This Extension
 
 -   Once you install the extension into your directus project by `npm install`
