@@ -2,11 +2,18 @@
 
 An easy to use insight panel to see custom raw query data from database
 
-# Details
+# 👀 Must Check
+
+-   Query response must be in array format
+-   Query field should have `code` interface with minimum length of 1000 characters
 
 ## Problem
 
 -   Getting data from database query and show it in a insights panel was missing.
+
+-   The ability to extract and display data from a database query within an insights panel is crucial for CRM and data-driven applications.
+-   Insights panels serve as a hub for users to access valuable information, gain actionable insights, and make informed decisions.
+-   This feature bridges the gap between raw data stored in the database and its meaningful interpretation, making Directus an even more versatile platform for managing customer relationships and data-driven business operations.
 
 ## Extension Type
 
