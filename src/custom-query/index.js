@@ -21,13 +21,13 @@ export default {
           console.log('typeof value', value, typeof value)
           if (isInteger(value)) {
             // If it's a integer, convert it to a integer type
-            expectedData[key] = `${key}=${parseInt(value)}`;
+            expectedData[key] = `${parseInt(value)}`;
           } else if(isFloat(value)){
              // If it's a float, convert it to a float type
-            expectedData[key] = `${key}=${parseFloat(value)}`;
+            expectedData[key] = `${parseFloat(value)}`;
           } else if (typeof value === "string") {
             // If it's a string, keep it as a string
-            expectedData[key] = `${key}='${value}'`;
+            expectedData[key] = `'${value}'`;
           } else {
             console.log(`Unsupported data type for key ${key}`)
           }
