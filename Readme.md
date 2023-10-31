@@ -1,8 +1,48 @@
-# Custom Query Panel
+# Directus Custom Query Panel
 
-An easy to use insight panel to see custom raw query data from database
+Behold the magic 🎩✨ of our simple panel! View your data without the hassle of writing custom endpoints or preparing views - it's like having your cake 🍰 and eating it too, but for data! 💾🎉
 
-# 👀 Must Check
+
+## Details
+
+- Execute custom SQL queries directly from the panel.
+- Use dynamic parameters to reuse queries with different values.
+- Display query results in a simple tabular structure for easy readability.
+- Enhance data visibility and understanding by enabling users to extract meaningful insights from their data which is crucial for CRM and data-driven applications.
+
+
+## 👀Set Up Instructions
+
+- Either install through NPM [npm install @7span/directus-extension-custom-query-panel](https://www.npmjs.com/) or [Installing Through the Extensions Folder](https://docs.directus.io/extensions/installing-extensions.html#installing-through-the-extensions-folder).
+- Once Installed/configured extension you need hit the below curl request to create a default table(`cqp_queries`) to store the queries.
+
+**NOTE**: Replace `localhost:8055` with your domain
+
+```bash
+curl --location --request POST 'http://localhost:8055/query/create-table'
+```
+
+-   Table named `cqp_queries` will be available in your project.
+
+## How To use This Extension
+
+-  Create the queries in the table (`cqp_queries`) as explained in below example.
+
+For Example: 
+```bash
+select first_name, last_name from employees where department = ${department} 
+```
+
+-  This extension provides support of *`global variables`* added in insights like department or week.
+![Department Example](/images/department-panel.png)
+
+-  Use `variables` field give in panel settings below `fields`.
+![dynamic-fields](/images/dynamic-fields.png)
+
+-  Use `double mustache` syntax for entering `value` field to get value from variables.
+![Alt text](/images/double-mustache.png)
+
+## 👀 Must Check
 
 -   Query response must be in array format
 -   Query field should have `code` interface with minimum length of 1000 characters
@@ -18,10 +58,6 @@ An easy to use insight panel to see custom raw query data from database
 ## Extension Type
 
 -   📦 Bundle ( Panel + Custom Endpoint )
-
-## Set Up Instructions
-
-{ Include any instructions required to set up this submission - including any registrations for third-party services. }
 
 ## Screenshots
 
@@ -43,27 +79,7 @@ An easy to use insight panel to see custom raw query data from database
 -   this extension uses raw query. Use with caution. It might do uninteded actions.
 -   Roles and permission check for query
 
-## How To use This Extension
-
--   Once you install the extension into your directus project by `npm install`
--   Hit the below curl request to create a default table to store the queries.
-
-NOTE: Replace `localhost:8055` with your domain
-
-```bash
-curl --location --request POST 'localhost:8055/query/create-table'
-```
-
--   Table named `cqp_queries` will be available in your project.
--   Create the queries in the table.
--   Provide the query id where the vue component is available.
-
-### Global Variables Support
-
--   This extension provides support of global variables added in insights like department or week.
--   Use `variables` field give in panel settings below `fields`.
--   Use `double mustache` syntax for entering `value` field to get value from variables.
-
 ### Table Fields
 
 -   We have repeater interface with multiple columns support
+
