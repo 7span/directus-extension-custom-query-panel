@@ -1,83 +1,108 @@
 <template>
-  <v-table
-    class="text"
-    :class="{ 'has-header': showHeader }"
-    :items="items"
-    :loading="loading"
-    v-model:headers="tableHeaders"
-  >
-  </v-table>
+    <v-table
+        class="text"
+        :class="{ 'has-header': showHeader }"
+        :items="items"
+        :loading="loading"
+        v-model:headers="tableHeaders"
+    >
+    </v-table>
 </template>
 
 <script>
 export default {
-  props: {
-    showHeader: {
-      type: Boolean,
-      default: false,
+    setup() {
+        return {};
     },
-    query: {
-      type: String,
-      required: true,
+    inject: ["api"],
+    props: {
+        showHeader: {
+            type: Boolean,
+            default: false,
+        },
+        query_id: {
+            type: String,
+            required: true,
+        },
+        fields: {
+            type: Array,
+            required: () => [],
+        },
+        variables: {
+            type: Array,
+            required: () => [],
+        },
     },
-    fields: {
-      type: String,
-      required: true,
+    watch: {
+        variables() {
+            this.getData();
+        },
     },
-  },
-  data() {
-    return {
-      items: [],
-      loading: false,
-    };
-  },
-  computed: {
-    tableHeaders() {
-      return this.localFields?.map((field) => {
+    data() {
         return {
-          text: field.toUpperCase(),
-          value: field,
-          align: "left",
-          sortable: false,
+            items: [],
+            loading: false,
         };
-      });
     },
-    localFields() {
-      return this.fields.split(",");
+    computed: {
+        tableHeaders() {
+            return this.fields?.map((field) => {
+                return {
+                    text: field.label.toUpperCase(),
+                    value: field.key,
+                    align: "left",
+                    sortable: false,
+                    width: field.width,
+                };
+            });
+        },
     },
-  },
-  inject: ["api"],
-  mounted() {
-    this.getData();
-  },
-  methods: {
-    getData() {
-      this.loading = true;
-      if (!this.query) return;
-      this.api
-        .get(`custom-query?query=${this.query}`)
-        .then((res) => {
-          if (res.data && res.data.length) {
-            this.items = res.data[0];
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        })
-        .finally(() => {
-          this.loading = false;
-        });
+    mounted() {
+        this.getData();
     },
-  },
+    methods: {
+        getData() {
+            if (!this.query_id) {
+                alert("Please provide Query ID from panel configuration");
+                return;
+            }
+            this.loading = true;
+
+            this.api(`query/execute`, {
+                params: {
+                    query_id: this.query_id,
+                    variables: this.variables.length
+                        ? this.variables
+                        : undefined,
+                },
+            })
+                .then((res) => {
+                    if (res.data && res.data.data.length) {
+                        this.items = res.data.data;
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
+                .finally(() => {
+                    this.loading = false;
+                });
+        },
+    },
 };
 </script>
 
-<style scoped>
-.text {
-  padding: 12px;
+<style>
+.workspace .text {
+    padding: 12px;
 }
 
-.text.has-header {
-  padding: 0 12px;
+.workspace .panel-container {
+    /* Fix for providing Scroll in table  */
+    overflow-y: scroll;
+}
+
+.workspace .text.has-header {
+    padding: 0 12px;
 }
 </style>
