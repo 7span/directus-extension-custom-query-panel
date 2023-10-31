@@ -1,35 +1,42 @@
 import { dollar as phrase } from "paraphrase";
+import { CUSTOM_QUERY_COLLECTION, CUSTOM_QUERY_FIELD_LENGTH, DIRECTUS_FIELDS_OBJ } from "./utils/config";
 
 export default {
-  id: "query",
+  id: "custom-query-panel",
   handler: (router, { services, logger, database }) => {
     const { ItemsService } = services;
-    const tableName = "cqp_queries";
 
     // Endpoint to execute a custom query
     router.get("/execute", async (req, res) => {
       try {
+        // Check if query_id is provided
+        if (!req.query.query_id) {
+          return res.status(400).json({ error: "Query ID is required" });
+        }
+
         // Initialize the custom query service
-        const customQueryService = new ItemsService(tableName, { schema: req.schema });
-        const { query_id } = req.query;
+        const customQueryService = new ItemsService(CUSTOM_QUERY_COLLECTION, { schema: req.schema });
 
         // Retrieve the custom query based on the provided ID
-        const customQueryData = await customQueryService.readOne(query_id);
+        const customQueryData = await customQueryService.readOne(req.query.query_id);
+
+        // Check if custom query data is retrieved
+        if (!customQueryData) {
+          return res.status(404).json({ error: "Custom query not found" });
+        }
 
         // Prepare the variables for the custom query
-        const queryVariables = req.query.variables;
+        const queryVariables = req.query.variables || [];
         const preparedVariables = prepareVariables(queryVariables);
 
         // Execute the custom query
-        const query = phrase(`${customQueryData.query}`, preparedVariables);
-        if (query) {
-          const executedQueryData = await database.raw(query);
-          const fetchedQueryData = executedQueryData[0];
-          logger.info("Custom Query Executed");
-          return res.status(200).json({ data: fetchedQueryData });
-        } else {
-          return res.status(400).json({ data: "No query found" });
-        }
+        const RAW_QUERY = phrase(`${customQueryData.query}`, preparedVariables);
+        logger.debug(`Raw query: ${RAW_QUERY}`);
+        const executedQueryData = await database.raw(RAW_QUERY);
+        const fetchedQueryData = executedQueryData[0];
+
+        logger.debug("Custom Query Executed");
+        return res.status(200).json({ data: fetchedQueryData });
       } catch (error) {
         logger.error(`error: ${error}`);
         return res.status(500).json({ error: `${error.message}` });
@@ -39,13 +46,20 @@ export default {
     // Endpoint to create a table for storing custom queries
     router.post("/create-table", async (req, res) => {
       try {
-        await database.schema.createTable(tableName, (table) => {
-          table.increments(), table.string("name"), table.string("query");
+        const customQueryService = new ItemsService('directus_fields', { schema: req.schema });
+
+        // Create a table for custom queries
+        await database.schema.createTable(CUSTOM_QUERY_COLLECTION, (table) => {
+          table.increments(), table.string("name"), table.varchar("query", CUSTOM_QUERY_FIELD_LENGTH);
         });
+
+        // Create a collection field of type code editor for MYSQL query
+        await customQueryService.createOne(DIRECTUS_FIELDS_OBJ);
+      
         return res
           .status(200)
           .json({
-            message: `Table Created for Custom Query Extension ${tableName}`,
+            message: `Table Created for Custom Query Extension ${CUSTOM_QUERY_COLLECTION}`,
           });
       } catch (error) {
         logger.error(`error: ${error}`);

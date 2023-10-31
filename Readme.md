@@ -19,33 +19,40 @@ Behold the magic 🎩✨ of our simple panel! View your data without the hassle 
 **NOTE**: Replace `localhost:8055` with your domain
 
 ```bash
-curl --location --request POST 'http://localhost:8055/query/create-table'
+curl --location --request POST 'http://localhost:8055/custom-query-panel/create-table'
 ```
 
 -   Table named `cqp_queries` will be available in your project.
 
 ## How To use This Extension
 
--  Create the queries in the table (`cqp_queries`) as explained in below example.
+1.  Create the queries in the table (`cqp_queries`) as explained in below example.
 
-For Example: 
 ```bash
 select first_name, last_name from employees where department = ${department} 
 ```
+<!-- ![Add Query](/images/add-query.png) -->
 
--  This extension provides support of *`global variables`* added in insights like department or week.
-![Department Example](/images/department-panel.png)
+2.  This extension provides support of *`global variables`* added in insights like department or week.
+<!-- ![Department Example](/images/department-panel.png) -->
 
--  Use `variables` field give in panel settings below `fields`.
-![dynamic-fields](/images/dynamic-fields.png)
+3.  Use `variables` field give in panel settings below `fields`.
+<!-- ![dynamic-fields](/images/dynamic-fields.png)
+![Adding File Label](/images/file-label.png) -->
 
--  Use `double mustache` syntax for entering `value` field to get value from variables.
-![Alt text](/images/double-mustache.png)
+4.  Use `double mustache` syntax for entering `value` field to get value from variables.
+<!-- ![Alt text](/images/double-mustache.png) -->
 
-## 👀 Must Check
+## 👀 Environment Variables
+- You can provide collection name in CUSTOM_QUERY_COLLECTION as per your needs.
+- It Also provide support for custom query length using CUSTOM_QUERY_FIELD_LENGTH
+```bash
+# default value CUSTOM_QUERY_COLLECTION = "cqp_queries" 
+CUSTOM_QUERY_COLLECTION="custom_query"
+# default value CUSTOM_QUERY_FIELD_LENGTH = 5000 
+CUSTOM_QUERY_FIELD_LENGTH=10000
+```
 
--   Query response must be in array format
--   Query field should have `code` interface with minimum length of 1000 characters
 
 ## Problem
 
@@ -61,8 +68,11 @@ select first_name, last_name from employees where department = ${department}
 
 ## Screenshots
 
-{ Include at least one screenshot or video. }
-
+![Add Query](/images/add-query.png)
+![Department Example](/images/department-panel.png)
+![dynamic-fields](/images/dynamic-fields.png)
+![Adding File Label](/images/file-label.png)
+![Alt text](/images/double-mustache.png)
 ## Collaborators
 
 -   [Harsh Kansagara](https://github.com/theharshin)

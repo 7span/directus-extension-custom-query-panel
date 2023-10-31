@@ -68,7 +68,7 @@ export default {
             }
             this.loading = true;
 
-            this.api(`query/execute`, {
+            this.api(`custom-query-panel/execute`, {
                 params: {
                     query_id: this.query_id,
                     variables: this.variables.length
