@@ -41,7 +41,7 @@
     },
     "homepage": "https://github.com/7span/directus-extension-custom-query-panel#Readme",
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com/"
+        "access": "public"
     },
     "dependencies": {
         "dotenv": "^16.3.1",
