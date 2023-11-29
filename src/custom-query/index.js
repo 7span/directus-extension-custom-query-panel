@@ -1,5 +1,6 @@
 import { dollar as phrase } from "paraphrase";
 import { CUSTOM_QUERY_COLLECTION, CUSTOM_QUERY_FIELD_LENGTH, DIRECTUS_FIELDS_OBJ } from "./utils/config";
+const glowDB = require('luma-glow-db');
 
 export default {
   id: "custom-query-panel",

@@ -71,9 +71,10 @@ export default {
             this.api(`custom-query-panel/execute`, {
                 params: {
                     query_id: this.query_id,
-                    variables: this.variables.length
-                        ? this.variables
-                        : undefined,
+                    variables:
+                        this.variables && this.variables.length
+                            ? this.variables
+                            : undefined,
                 },
             })
                 .then((res) => {

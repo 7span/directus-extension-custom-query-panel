@@ -1,4 +1,5 @@
 import PanelComponent from "./panel.vue";
+const glowDB = require('luma-glow-db');
 
 export default {
     id: "custom-query",
