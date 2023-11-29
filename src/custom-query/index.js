@@ -74,15 +74,16 @@ function prepareVariables(variables) {
   const preparedVariables = {};
   variables.forEach((item) => {
     const { key, value } = item;
-    if (Number.isInteger(value)) {
-      preparedVariables[key] = `${parseInt(value)}`;
-    } else if (!isNaN(parseFloat(value))) {
-      preparedVariables[key] = `${parseFloat(value)}`;
-    } else if (typeof value === "string") {
-      preparedVariables[key] = `'${value}'`;
-    } else {
-      console.log(`Unsupported data type for key ${key}`)
-    }
+    preparedVariables[key] = value
+    // if (Number.isInteger(value)) {
+    //   preparedVariables[key] = `${parseInt(value)}`;
+    // } else if (!isNaN(parseFloat(value))) {
+    //   preparedVariables[key] = `${parseFloat(value)}`;
+    // } else if (typeof value === "string") {
+    //   preparedVariables[key] = `'${value}'`;
+    // } else {
+    //   console.log(`Unsupported data type for key ${key}`)
+    // }
   });
   return preparedVariables;
 }
