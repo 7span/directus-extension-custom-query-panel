@@ -1,11 +1,12 @@
 {
   "name": "@7span/directus-extension-custom-query-panel",
-  "version": "1.1.3",
+  "version": "1.1.5",
   "scripts": {
     "build": "directus-extension build",
     "dev": "directus-extension build -w --no-minify",
     "link": "directus-extension link",
-    "add": "directus-extension add"
+    "add": "directus-extension add",
+    "prepublishOnly": "npm run build"
   },
   "directus:extension": {
     "host": "^9.22.4",
@@ -41,11 +42,13 @@
   },
   "homepage": "https://github.com/7span/directus-extension-custom-query-panel#Readme",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
     "access": "public"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
     "paraphrase": "^3.1.1"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
