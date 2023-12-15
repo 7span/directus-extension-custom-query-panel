@@ -33,7 +33,7 @@ export default {
         const RAW_QUERY = phrase(`${customQueryData.query}`, preparedVariables);
         logger.debug(`Raw query: ${RAW_QUERY}`);
         const executedQueryData = await database.raw(RAW_QUERY);
-        const fetchedQueryData = executedQueryData[0];
+        const fetchedQueryData = executedQueryData.rows;
 
         logger.debug("Custom Query Executed");
         return res.status(200).json({ data: fetchedQueryData });
